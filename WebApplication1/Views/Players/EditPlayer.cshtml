@@ -1,0 +1,47 @@
+﻿@model EditPlayerModel
+
+<form action="/Players/EditPlayer" method="post">
+	<div asp-validation-summary="All"></div>
+	<input type="hidden" name="Id" value="@Model.Player.ID" />
+	<div>
+		<label asp-for="Player.LastName">Фамилия</label><br />
+		<input type="text" name="lastName" value="@Model.Player.LastName" asp-for="EditPlayerForm.LastName" />
+		<span asp-validation-for="EditPlayerForm.LastName" />
+	</div>
+
+	<div>
+		<label asp-for="Player.FirstName">Имя</label><br />
+		<input type="text" name="firstName" value="@Model.Player.FirstName" asp-for="EditPlayerForm.FirstName" />
+		<span asp-validation-for="EditPlayerForm.FirstName"></span>
+	</div>
+
+	<div>
+		<label asp-for="Player.BirthDate"></label><br />
+		<input type="text" name="birthDate" value="@Model.Player.BirthDate" asp-for="EditPlayerForm.BirthDate" />
+		<span asp-validation-for="EditPlayerForm.BirthDate"></span>
+	</div>
+
+	<div>
+		<label asp-for="Player.Gender">Пол</label><br />
+		<select asp-for="EditPlayerForm.Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+		<span asp-validation-for="EditPlayerForm.Gender" />
+	</div>
+
+	<div>
+		<label asp-for="Player.Country">Страна</label><br />
+		<select asp-for="EditPlayerForm.Country" asp-items="Html.GetEnumSelectList<Country>()"></select>
+		<span asp-validation-for="EditPlayerForm.Country" />
+	</div>
+
+	<div>
+		<label asp-for="Player.TeamID">Команда</label><br />
+		<select name="teamID" asp-for="EditPlayerForm.TeamID">
+			@foreach (var team in Model.Teams)
+			{
+				<option value="@team.ID" selected="@(team.ID == Model.Player.TeamID)">@team.Name</option>
+			}
+		</select>
+	</div>
+	<br />
+	<button type="submit">Сохранить изменения</button>
+</form>

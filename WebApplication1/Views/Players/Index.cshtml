@@ -1,0 +1,58 @@
+﻿@model List<Player>
+
+<style>
+	.table {
+		width: 100%;
+		margin-bottom: 20px;
+		border: 1px solid #000000;
+		border-collapse: collapse;
+	}
+
+		.table th {
+			font-weight: bold;
+			padding: 5px;
+			background: #888888;
+			border: 1px solid #000000;
+		}
+
+		.table td {
+			border: 1px solid #000000;
+			padding: 5px;
+		}
+</style>
+
+<table class="table">
+	<thead>
+		<tr id="table-header">
+			<th>Номер</th>
+			<th>Фамилия</th>
+			<th>Имя</th>
+			<th>Пол</th>
+			<th>Дата рождения</th>
+			<th>Страна</th>
+			<th>Команда</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var player in Model)
+		{
+			<tr>
+				<td>@player.ID</td>
+				<td>@player.LastName</td>
+				<td>@player.FirstName</td>
+				<td>@player.Gender</td>
+				<td>@player.BirthDate</td>
+				<td>@player.Country</td>
+				<td>@player.Team?.Name</td>
+				<td>
+					<a href="/Players/EditPlayer/?playerId=@player.ID">Редактировать</a>
+				</td>
+				<td>
+					<a href="/Players/RemovePlayer/?playerId=@player.ID">Удалить</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
